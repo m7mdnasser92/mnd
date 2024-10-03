@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Maker by Abo Nasser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        h2 {
+            color: #444;
+            border-bottom: 2px solid #444;
+            padding-bottom: 5px;
+        }
+        input[type="text"], input[type="email"], input[type="tel"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CV Maker by Abo Nasser</h1>
+        
+        <h2>معلومات الاتصال</h2>
+        <input type="text" id="fullName" placeholder="الاسم بالكامل">
+        <input type="text" id="desiredJob" placeholder="الوظيفة المرغوبة">
+        <input type="tel" id="mobile" placeholder="رقم الموبايل">
+        <input type="email" id="email" placeholder="البريد الإلكتروني">
+        <input type="text" id="address" placeholder="العنوان">
+        <input type="text" id="otherContact" placeholder="أخرى">
+        
+        <h2>الخبرة العملية</h2>
+        <h3>المكان الأول</h3>
+        <input type="text" id="company1" placeholder="اسم الشركة">
+        <input type="text" id="address1" placeholder="العنوان">
+        <input type="text" id="jobTitle1" placeholder="المسمى الوظيفي">
+        <input type="text" id="period1" placeholder="فترة العمل">
+        
+        <h3>المكان الثاني</h3>
+        <input type="text" id="company2" placeholder="اسم الشركة">
+        <input type="text" id="address2" placeholder="العنوان">
+        <input type="text" id="jobTitle2" placeholder="المسمى الوظيفي">
+        <input type="text" id="period2" placeholder="فترة العمل">
+        
+        <h3>المكان الثالث</h3>
+        <input type="text" id="company3" placeholder="اسم الشركة">
+        <input type="text" id="address3" placeholder="العنوان">
+        <input type="text" id="jobTitle3" placeholder="المسمى الوظيفي">
+        <input type="text" id="period3" placeholder="فترة العمل">
+        
+        <h3>أخرى</h3>
+        <input type="text" id="otherExperience" placeholder="خبرات أخرى">
+        
+        <h2>التعليم</h2>
+        <input type="text" id="university" placeholder="اسم الجامعة">
+        <input type="text" id="degree" placeholder="الدرجة العلمية">
+        <input type="text" id="graduationYear" placeholder="سنة التخرج">
+        <input type="text" id="grade" placeholder="التقدير">
+        <input type="text" id="otherEducation" placeholder="أخرى">
+        
+        <h2>المهارات</h2>
+        <input type="text" id="technicalSkills" placeholder="المهارات التقنية">
+        <input type="text" id="languageSkills" placeholder="المهارات اللغوية">
+        <input type="text" id="personalSkills" placeholder="المهارات الشخصية">
+        
+        <h2>الدورات</h2>
+        <h3>الدورة الأولى</h3>
+        <input type="text" id="courseName1" placeholder="اسم الدورة">
+        <input type="text" id="courseProvider1" placeholder="الجهة المقدمة">
+        <input type="text" id="courseContent1" placeholder="المحتوى">
+        
+        <h3>الدورة الثانية</h3>
+        <input type="text" id="courseName2" placeholder="اسم الدورة">
+        <input type="text" id="courseProvider2" placeholder="الجهة المقدمة">
+        <input type="text" id="courseContent2" placeholder="المحتوى">
+        
+        <h3>أخرى</h3>
+        <input type="text" id="otherCourses" placeholder="دورات أخرى">
+        
+        <h2>معلومات إضافية</h2>
+        <input type="text" id="additional1" placeholder="إضافة رقم 1">
+        <input type="text" id="additional2" placeholder="إضافة رقم 2">
+        <input type="text" id="additional3" placeholder="إضافة رقم 3">
+        <input type="text" id="additional4" placeholder="إضافة رقم 4">
+        <input type="text" id="additional5" placeholder="إضافة رقم 5">
+        
+        <br><br>
+        <button onclick="createExcel()">إنشاء</button>
+        <button onclick="sendWhatsApp()">إرسال عبر WhatsApp</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script>
+        function createExcel() {
+            var wb = XLSX.utils.book_new();
+            var ws_data = [
+                ["الاسم بالكامل", document.getElementById("fullName").value],
+                ["الوظيفة المرغوبة", document.getElementById("desiredJob").value],
+                ["رقم الموبايل", document.getElementById("mobile").value],
+                ["البريد الإلكتروني", document.getElementById("email").value],
+                ["العنوان", document.getElementById("address").value],
+                ["معلومات اتصال أخرى", document.getElementById("otherContact").value],
+                ["الخبرة العملية - المكان الأول"],
+                ["اسم الشركة", document.getElementById("company1").value],
+                ["العنوان", document.getElementById("address1").value],
+                ["المسمى الوظيفي", document.getElementById("jobTitle1").value],
+                ["فترة العمل", document.getElementById("period1").value],
+                // ... (أضف باقي الحقول بنفس الطريقة)
+            ];
+            var ws = XLSX.utils.aoa_to_sheet(ws_data);
+            XLSX.utils.book_append_sheet(wb, ws, "CV Data");
+            XLSX.writeFile(wb, "CV_Data.xlsx");
+        }
+
+        function sendWhatsApp() {
+            var data = {
+                fullName: document.getElementById("fullName").value,
+                desiredJob: document.getElementById("desiredJob").value,
+                mobile: document.getElementById("mobile").value,
+                email: document.getElementById("email").value,
+                // ... (أضف باقي الحقول)
+            };
+
+            var message = "CV Data:\n" + JSON.stringify(data, null, 2);
+            var whatsappUrl = "https://api.whatsapp.com/send?phone=00201060493712&text=" + encodeURIComponent(message);
+
+            fetch(whatsappUrl, {
+                method: 'GET',
+                mode: 'no-cors'
+            }).then(() => {
+                window.open(whatsappUrl, '_blank');
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('حدث خطأ أثناء إرسال البيانات. يرجى المحاولة مرة أخرى.');
+            });
+        }
+    </script>
+</body>
+</html>
